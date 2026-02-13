@@ -6,7 +6,6 @@
   home.stateVersion = "24.05";
 
   imports = [
-    ./modules/terminal.nix
     ./modules/shell.nix
     ./modules/ui.nix
     ./modules/editor.nix
