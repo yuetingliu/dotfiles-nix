@@ -776,15 +776,3 @@
  ;;  (add-hook 'lsp-managed-mode-hook #'my/maybe-enable-lsp-ui-imenu)
  ;;  ;; (add-hook 'org-mode-hook (lambda () (lsp-ui-imenu-enable nil)))
 )
-
-;; python
-;; ------
-;; python linting and formatting
-;; load flycheck-ruff for linting along with other linters like LSP
-(load! "lisp/flycheck-ruff.el")
-;; also use ruff for formating
-(use-package! ruff-format
-  :after python-mode
-  :config
-  (add-hook 'python-mode-hook 'ruff-format-on-save-mode))
-;; ----------------
