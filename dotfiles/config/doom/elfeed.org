@@ -1,0 +1,154 @@
+#+TITLE: Elfeed sources
+* Tags
+** tier2
+*** tier1
+* Feeds :elfeed:
+** AI :ai:
+*** https://www.reddit.com/r/MachineLearning/.rss :reddit:news:
+Reddit Machine Learning
+*** http://news.mit.edu/rss/topic/artificial-intelligence2 :institute:mit:
+MIT AI blog
+*** https://www.fast.ai/index.xml :institute:fastai:
+Fast.ai blog
+*** https://www.sciencedaily.com/rss/computers_math/artificial_intelligence.xml :magazine:
+Science daily about AI
+*** https://www.artificial-intelligence.blog/ai-news?format=rss
+AI blog
+*** https://www.emergentmind.com/feeds/rss :news:gpt:
+EmergentMind
+*** https://stratechery.com/feed/ :blog:
+AI newsletter, analysis on tech and strategy by Ben Thompson
+*** https://pytorch.org/feed.xml :blog:meta:pytorch:
+Pytorch blog
+** Self-driving-car :car:
+*** https://blog.waymo.com/rss.xml :institute:news:
+Waymo official blog
+*** https://news.mit.edu/topic/mitautonomous-vehicles-rss.xml :institute:
+MIT self driving car
+*** https://www.theverge.com/transportation/rss/index.xml :magazine:
+The verge self driving car coverage
+*** https://www.reddit.com/r/SelfDrivingCars/.rss :reddit:
+Reddit self-driving car subreddit
+*** https://medium.com/feed/cruise :institute:
+Cruise blog
+** Finance :finance:
+*** https://blogs.cfainstitute.org/investor/feed/
+*** https://www.blackrockbkcc.com/rss/news-releases.xml?items=15 :institute:
+Black Rock
+*** https://www.forbes.com/money/feed/ :news:forbes:money:
+Forbes money rss
+** News :news:
+*** https://www.technologyreview.com/feed :mit:tech:
+MIT technology review
+*** https://syncedreview.com/feed :synced:tech:ai:
+*** https://www.economist.com/the-world-this-week/rss.xml :economist:
+Economist the world this week
+*** https://www.economist.com/finance-and-economics/rss.xml :economist:
+Economist business and finance
+*** http://feeds.bbci.co.uk/news/world/rss.xml :bbc:
+BBC world news
+*** https://www.iamexpat.nl/rss/news-netherlands/news :dutch:
+I am expat news about netherlands
+*** https://www.theverge.com/rss/index.xml :verge:tech:
+The verge
+*** https://techcrunch.com/feed :techcrunch:tech:
+Tech crunch news site
+*** https://news.ycombinator.com/rss :hackernews:tech:
+Hacker news
+** Youtube :youtube:
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg :distrotube:
+DistroTube, dt channel
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCwWhs_6x42TyRM4Wstoq8HA :fun:dailyshow:
+Daily show with Trever Noah
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCMtFAi84ehTSYSE9XoHefig :fun:lateshow:
+Late show with Stephen Colbert
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCfzlCWGWYyIQ0aLC5w48gBQ
+Sentdex youtube channel, dessect code
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCYO_jab_esuFRV4b17AJtAw :math:3b1b:
+3blue1brown fansinating visualization
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCSHZKyawb77ixDdsGog4iWA :lex:
+Lex Fridman youtube
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCHB9VepY6kYvZjj0Bgxnpbw :henry:
+Henry AI Labs, with weekly summary in ai
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCP7WmQ_U4GB3K51Od9QvM0w :networking:cyber_security:
+David Bombal, networking, cyber_security
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCXUPKJO5MZQN11PqgIvyuvQ :andrej:tier1:
+Andrej Karpathy
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg :paper:ai:
+two minutes paper
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCZHmQk67mSJgfCCTn7xBfew :paper:
+Yannic Kilcher about papers
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA :cs:
+Computerphile
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCMUnInmOkrWN4gof9KlhNmQ :knowledge:laogao:
+Laogao broad topics
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UC4QZ_LsYcvcq7qOsOhpAX4A :knowledge:coldfusion:
+ColdFusion youtube channel
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UC1yNl2E66ZzKApQdRuTQ4tw :knowledge:tech:ai:sabine:
+Sabine Hossenfelder, physicist
+** Blogs :blog:
+*** https://tim.blog/feed/ :timferris:
+Tim Ferris author and podcaster
+*** https://seths.blog/feed :influencer:sethgodin:
+Seth Godin blog
+*** https://jamesclear.com/feed :jamesclear:habit:
+James Clear blog
+*** https://ryanholiday.net/feed :reading:books:influencer:
+Ryan Holiday blog
+*** https://manateelazycat.github.io/feed.xml :emacs:linux:misc:
+An awesome learner, highly capable
+*** http://nullprogram.com/feed/ :emacs:linux:tech:
+author of elfeed
+*** http://www.aaronsw.com/2002/feeds/pgessays.rss :paulgraham:
+Paul Graham assay
+*** https://daryl.wakatara.com/rss.xml :darylmanning:tech:
+Daryl Manning
+*** https://huyenchip.com/feed.xml :ai:ml:
+Chip Huyen, author of ml interview book
+*** https://blog.gregbrockman.com/feed :ai:ml:llm:
+Greg Brockman
+** Newsletter :newsletter:
+*** https://kill-the-newsletter.com/feeds/qkdt84ca6551bffj.xml :thebatch:vision:ai:
+The Batch, created with kill-the-newsletter
+*** https://kill-the-newsletter.com/feeds/821kcqwu2skzr8l4.xml :institute:meta:tier1:
+Meta AI via kill-the-newsletter
+*** https://kill-the-newsletter.com/feeds/syy9z9rkelc5dxm6.xml :nextdraft:article:
+NextDraft newsletter, created with kill-the-newsletter
+*** https://kill-the-newsletter.com/feeds/1p7xxta1is2033vx.xml :fs:blog:
+Farnamstreet newsletter
+*** https://kill-the-newsletter.com/feeds/wbsh2sptk4hbthk7.xml :tech:ai:aiweekly:
+AI weekly by essentials
+*** https://kill-the-newsletter.com/feeds/lvu4jkgj1mjxoezy.xml :ai:paperswithcode:
+Papers with code newsletter
+*** https://kill-the-newsletter.com/feeds/nghq8ynyj6q0c3wc.xml :ai:importai:
+Import AI
+*** https://kill-the-newsletter.com/feeds/kj1tpn22w8t7avj5.xml :ai:mit:
+MIT tech review
+** Companies :company:ai:
+*** https://research.facebook.com/feed/ :meta:research:blog:
+Meta research blog
+*** https://machinelearning.apple.com/rss.xml :apple:blog:ai:
+Apple machine learning blog
+*** https://openai.com/blog/rss :institute:openai:tier1:blog:ai:
+OpenAI blog
+*** http://feeds.feedburner.com/blogspot/gJZg :institute:google:blog:tier1:ai:
+Google AI blog
+*** https://blog.google/rss/ :institute:google:tier1:ai:
+Google blog
+*** https://blog.google/technology/ai/rss/ :institute:google:blog:tier1:ai:tech:
+Google tech blog
+*** https://deepmind.com/blog/feed/basic/ :institute:deepmind:google:tier1:blog:ai:
+Deep mind blog
+** Papers :paper:
+*** https://lexfridman.com/feed :influencer:
+Lex Fridman home page
+*** https://deepmind.com/publications/rss.xml :institute:deepmind:
+Deep mind research papers
+** Magazine :magazine:
+*** http://feeds.hbr.org/harvardbusiness :hbr:management:knowledge:
+Harvard business review
+** China :china:
+*** https://www.jiqizhixin.com/rss :jiqizhixin:tech:ai:news:
+机器之心
+*** https://www.solidot.org/index.rss :solidot:news:
+奇客
