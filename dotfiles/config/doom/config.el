@@ -140,8 +140,10 @@
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 ;; use nerd font
 ;; (setq doom-font (font-spec :family "MesloLGS NF" :size 13 :weight 'semi-light)
-(setq doom-symbol-font (font-spec :family "MesloLGS Nerd Font Propo" :size 13))
-(setq doom-font (font-spec :family "MesloLGS Nerd Font Propo" :size 14))
+;; (setq doom-symbol-font (font-spec :family "FiraCode Nerd Font Propo"))
+;; (setq doom-font (font-spec :family "FiraCode Nerd Font Propo"))
+(setq doom-symbol-font (font-spec :family "Iosevka" :size 13.0))
+(setq doom-font (font-spec :family "Iosevka" :size 12.0))
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
@@ -579,15 +581,15 @@
  (setq org-hide-emphasis-markers t)
  (setq org-pretty-entities t)
  (setq org-ellipsis "...")
- (setq org-modern-label-border 0.3)
+ ;; (setq org-modern-label-border 0.3)
  (setq org-modern-table t)
  ;; modern star
  (setq org-modern-star '("◉" "○" "◈" "◇" "*"))
  ;; prettify org-agenda
  (add-hook 'org-agenda-finalize-hook #'org-modern-agenda))
- ;; global mode
- (global-org-modern-mode)
- ;; (add-hook 'org-mode-hook #'org-modern-mode)
+;;  ;; global mode
+;;  (global-org-modern-mode)
+;;  ;; (add-hook 'org-mode-hook #'org-modern-mode)
 
 ;; set transparency
 (set-frame-parameter nil 'alpha-background 95) ; For current frame
@@ -713,28 +715,28 @@
   )
 )
 
-;; programming
-;; -----------
-;; -----------
-;; set up github copilot
-;; accept completion from copilot and fallback to company
-(use-package! copilot
-  :hook (prog-mode . copilot-mode)
-  :bind (:map copilot-completion-map
-              ("<tab>" . 'copilot-accept-completion)
-              ("TAB" . 'copilot-accept-completion)
-              ("C-TAB" . 'copilot-accept-completion-by-word)
-              ("C-<tab>" . 'copilot-accept-completion-by-word)
-              ("M-n" . copilot-next-completion)
-              ("M-p" . copilot-previous-completion)
-        )
-  :config
-    (add-to-list 'copilot-indentation-alist '(prog-mode 4))
-    (add-to-list 'copilot-indentation-alist '(org-mode 2))
-    (add-to-list 'copilot-indentation-alist '(text-mode 2))
-    (add-to-list 'copilot-indentation-alist '(closure-mode 2))
-    (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2))
-)
+;; ;; programming
+;; ;; -----------
+;; ;; -----------
+;; ;; set up github copilot
+;; ;; accept completion from copilot and fallback to company
+;; (use-package! copilot
+;;   :hook (prog-mode . copilot-mode)
+;;   :bind (:map copilot-completion-map
+;;               ("<tab>" . 'copilot-accept-completion)
+;;               ("TAB" . 'copilot-accept-completion)
+;;               ("C-TAB" . 'copilot-accept-completion-by-word)
+;;               ("C-<tab>" . 'copilot-accept-completion-by-word)
+;;               ("M-n" . copilot-next-completion)
+;;               ("M-p" . copilot-previous-completion)
+;;         )
+;;   :config
+;;     (add-to-list 'copilot-indentation-alist '(prog-mode 4))
+;;     (add-to-list 'copilot-indentation-alist '(org-mode 2))
+;;     (add-to-list 'copilot-indentation-alist '(text-mode 2))
+;;     (add-to-list 'copilot-indentation-alist '(closure-mode 2))
+;;     (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2))
+;; )
 
 
 ;; LSP related

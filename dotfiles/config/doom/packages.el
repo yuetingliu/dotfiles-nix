@@ -121,11 +121,11 @@
 ;; use beacon
 (package! beacon)
 
-;; use org-modern for eye-candy org-mode
-(package! org-modern)
+;; ;; use org-modern for eye-candy org-mode
+;; (package! org-modern)
 
-;; use ruff as python formatter
-(package! ruff-format)
+;; ;; use ruff as python formatter
+;; (package! ruff-format)
 
 ;; ;; use lsp-bridge
 ;; (when (package! lsp-bridge

@@ -10,6 +10,7 @@
     ############################################################
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code
+    iosevka
   ];
 
   # Later, GUI apps can live here too (optional)
