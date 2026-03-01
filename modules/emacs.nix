@@ -14,11 +14,13 @@ in
     git
     ripgrep
     fd
+    fzf
 
     gcc
     gnumake
     cmake
     pkg-config
+    libtool  # needed to compile vterm
 
     nodejs
     python3
