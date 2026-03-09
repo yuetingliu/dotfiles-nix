@@ -9,7 +9,7 @@ in
   ############################################################
 
   home.packages = with pkgs; [
-    emacs
+    emacs-pgtk    # pure gtk build supports real background transpaency
 
     git
     ripgrep

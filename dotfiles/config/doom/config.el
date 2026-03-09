@@ -592,9 +592,9 @@
 ;;  ;; (add-hook 'org-mode-hook #'org-modern-mode)
 
 ;; set transparency
-(set-frame-parameter nil 'alpha-background 95) ; For current frame
+(set-frame-parameter nil 'alpha-background 90) ; For current frame
 ;; (set-frame-parameter nil 'alpha-background 100) ; For current frame no transparency
-(add-to-list 'default-frame-alist '(alpha-background . 95)) ; For all new frames henceforth
+(add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
 
 ;; auto revert buffer
 (global-auto-revert-mode 1)
