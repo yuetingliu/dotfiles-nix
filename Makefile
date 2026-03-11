@@ -1,8 +1,14 @@
 PROFILE ?= yueting
 FLAKE   := .#$(PROFILE)
 
-.PHONY: apply update check rollback generations
+.PHONY: init apply update check rollback generations
 
+# Bootstrap on a fresh machine:
+# uses nix run so home-manager does not need to be preinstalled
+init:
+	nix run github:nix-community/home-manager -- switch --flake $(FLAKE)
+
+# Normal day-to-day apply after home-manager is present
 apply:
 	home-manager switch --flake $(FLAKE)
 
