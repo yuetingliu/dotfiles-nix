@@ -41,6 +41,12 @@
     # Sync & background tools
     ############################################################
     syncthing
+    keychain
+
+    ############################################################
+    # Developer runtimes / package managers
+    ############################################################
+    bun
   ];
 
   # Syncthing as user service (runs when you're logged in)
