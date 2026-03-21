@@ -105,7 +105,7 @@
       user-mail-address "yueting1106.liu@gmail.com")
 
 ;; set up elfeed feeds
-(setq rmh-elfeed-org-files (list "~/.doom.d/elfeed.org"))
+(setq rmh-elfeed-org-files (list "~/.config/doom/elfeed.org"))
 ;; set database location
 (setq elfeed-db-directory "~/org/data/elfeed")
 ;; (use-package! elfeed-tube
