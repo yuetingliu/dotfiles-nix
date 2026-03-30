@@ -778,3 +778,22 @@
  ;;  (add-hook 'lsp-managed-mode-hook #'my/maybe-enable-lsp-ui-imenu)
  ;;  ;; (add-hook 'org-mode-hook (lambda () (lsp-ui-imenu-enable nil)))
 )
+
+;; denote configuration
+(after! denote
+  (setq denote-directory (concat org-directory "denote/"))
+  (setq denote-file-type 'org)
+  (setq denote-known-keywords
+        '("emacs" "org" "ml" "cv" "system" "research" "journal" "idea"))
+  (setq denote-infer-keywords t)
+  (setq denote-sort-keywords t)
+  (setq denote-prompts '(title keywords)))
+
+(map! :leader
+      (:prefix ("n d" . "denote")
+       :desc "Create note"   "n" #'denote
+       :desc "Open/create"   "o" #'denote-open-or-create
+       :desc "Insert link"   "l" #'denote-link
+       :desc "Backlinks"     "b" #'denote-backlinks
+       :desc "Rename file"   "r" #'denote-rename-file
+       :desc "Search notes"  "s" #'consult-ripgrep))

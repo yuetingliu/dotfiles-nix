@@ -137,3 +137,6 @@
 ;;                  :build (:not compile)))
 ;;   (package! markdown-mode)
 ;;   (package! yasnippet))
+
+;; use denote for note taking
+(package! denote)
