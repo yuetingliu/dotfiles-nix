@@ -686,40 +686,45 @@
 
 ;; set up LLMs
 ;; with package gptel
-(use-package! gptel)
+;; (use-package! gptel)
 (defun my-get-api-key (machine)
-  "Retrieve API key for MACHINE from authinfo."
+  "Retrieve API key for MACHINE from ~/.authinfo emacs support"
   (let ((entry (car (auth-source-search :host machine :max 1 :require '(:user :secret)))))
     (when entry
       (let ((secret (funcall (plist-get entry :secret))))
-        (if (stringp secret) secret (error "Invalid secret for %s" machine))))))
+        (if (stringp secret) secret (error "Invalid secret for %s" machine)))))
+  ;; (let ((entry (car (auth-source-search :host machine :max 1 :require '(:user :secret)))))
+  ;;   (when entry
+  ;;     (let ((secret (funcall (plist-get entry :secret))))
+  ;;       (if (stringp secret) secret (error "Invalid secret for %s" machine))))))
 
 ;; Fetch API keys
-(setq gptel-api-key-openai (my-get-api-key "openai.com")
-      gptel-api-key-gemini (my-get-api-key "generativelanguage.googleapis.com")
-      gptel-api-key-openrouter (my-get-api-key "openrouter.ai"))
+(setq gptel-api-key-openrouter (my-get-api-key "openrouter.ai"))
+         ;; gptel-api-key-openai (my-get-api-key "openai.com")
+         ;; gptel-api-key-gemini (my-get-api-key "generativelanguage.googleapis.com")
+
 (after! gptel
-  (gptel-make-openai "OpenAI" :key gptel-api-key-openai :stream t)
-  (gptel-make-gemini "Gemini" :key gptel-api-key-gemini :stream t)
+  ;; (gptel-make-openai "OpenAI" :key gptel-api-key-openai :stream t)
+  ;; (gptel-make-gemini "Gemini" :key gptel-api-key-gemini :stream t)
   (gptel-make-openai "OpenRouter"
                      :host "openrouter.ai"
                      :endpoint "/api/v1/chat/completions"
                      :stream t
                      :key gptel-api-key-openrouter
-                     :models '(openai/o4-mini-high
-                               openai/o4-mini
-                               deepseek/deepseek-r1
-                               deepseek/deepseek-r1:free
-                               anthropic/claude-3.7-sonnet:beta
+                     :models '(openai/gpt-5.4-mini
+                               google/gemini-3.1-flash-lite-preview
+                               anthropic/claude-sonnet-4.6
+                               ;; anthropic/claude-3.7-sonnet:beta
                               )
   )
 )
+
 
 ;; programming
 ;; -----------
 ;; -----------
 ;; set up github copilot
-;; accept completion from copilot and fallback to company
+;; accept completion from copilot
 (use-package! copilot
   :hook (prog-mode . copilot-mode)
   :bind (:map copilot-completion-map
@@ -741,28 +746,28 @@
 
 ;; LSP related
 ;; --------------
-;; set lsp ui
-(use-package! lsp-ui
-  :after lsp-mode
-  :config
-  (setq
-    lsp-ui-sideline-show-hover t
-    lsp-ui-sideline-delay 0.5
-    lsp-ui-doc-delay 5
-    lsp-ui-sideline-ignore-duplicates t
-    lsp-ui-doc-position 'bottom
-    lsp-ui-doc-alignment 'frame
-    lsp-ui-doc-header nil
-    lsp-ui-doc-include-signature t
-    lsp-ui-doc-use-childframe t
-    lsp-ui-imenu-auto-refresh t
-    lsp-ui-imenu-refresh-delay 1
-    lsp-imenu-sort-methods '(position kind)
-    lsp-imenu-index-symbol-kinds '(Class Method Function Enum)
-    lsp-ui-imenu--custom-mode-line-format
-            '((:title "Classes" :category "Class")
-             (:title "Functions" :category "Function")
-             (:title "Methods" :category "Method")))
+;; ;; set lsp ui
+;; (use-package! lsp-ui
+;;   :after lsp-mode
+;;   :config
+;;   (setq
+;;     lsp-ui-sideline-show-hover t
+;;     lsp-ui-sideline-delay 0.5
+;;     lsp-ui-doc-delay 5
+;;     lsp-ui-sideline-ignore-duplicates t
+;;     lsp-ui-doc-position 'bottom
+;;     lsp-ui-doc-alignment 'frame
+;;     lsp-ui-doc-header nil
+;;     lsp-ui-doc-include-signature t
+;;     lsp-ui-doc-use-childframe t
+;;     lsp-ui-imenu-auto-refresh t
+;;     lsp-ui-imenu-refresh-delay 1
+;;     lsp-imenu-sort-methods '(position kind)
+;;     lsp-imenu-index-symbol-kinds '(Class Method Function Enum)
+;;     lsp-ui-imenu--custom-mode-line-format
+;;             '((:title "Classes" :category "Class")
+;;              (:title "Functions" :category "Function")
+;;              (:title "Methods" :category "Method")))
  ;; ;; Only enable lsp-ui-imenu in programming modes, not in org-mode
  ;;  (defun my/maybe-enable-lsp-ui-imenu ()
  ;;    "Enable lsp-ui-imenu only in programming modes, not in org-mode."
