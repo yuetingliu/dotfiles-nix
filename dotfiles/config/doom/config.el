@@ -293,8 +293,8 @@
 ;; diagram with plantUML
 ;; (setq plantuml-executable-path "/usr/bin/plantuml")
 ;; (setq plantuml-default-exec-mode 'executable)
-(setq plantuml-jar-path "/usr/share/java/plantuml/plantuml.jar")
-(setq plantuml-default-exec-mode 'jar)
+;; (setq plantuml-jar-path "/usr/share/java/plantuml/plantuml.jar")
+;; (setq plantuml-default-exec-mode 'jar)
 ;; (setq plantuml-server-url "http://localhost:8080")
 ;; (setq plantuml-default-exec-mode 'server)
 
@@ -556,7 +556,7 @@
 
 ;; set up org-babel
 ;; set global python interpreter
-(setq org-babel-python-command "/home/yueting/.pyenv/versions/3.10.12/bin/python")
+;; (setq org-babel-python-command "/home/yueting/.pyenv/versions/3.10.12/bin/python")
 
 ;; set browser to system default browser
 (setq browse-url-browser-function 'browse-url-xdg-open)
