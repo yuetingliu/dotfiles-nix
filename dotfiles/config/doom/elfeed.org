@@ -65,7 +65,7 @@ Late show with Stephen Colbert
 *** https://www.youtube.com/feeds/videos.xml?channel_id=UCfzlCWGWYyIQ0aLC5w48gBQ
 Sentdex youtube channel, dessect code
 *** https://www.youtube.com/feeds/videos.xml?channel_id=UCYO_jab_esuFRV4b17AJtAw :math:3b1b:
-3blue1brown fansinating visualization
+3blue1brown fascinating visualization
 *** https://www.youtube.com/feeds/videos.xml?channel_id=UCSHZKyawb77ixDdsGog4iWA :lex:
 Lex Fridman youtube
 *** https://www.youtube.com/feeds/videos.xml?channel_id=UCHB9VepY6kYvZjj0Bgxnpbw :henry:
@@ -86,6 +86,24 @@ Laogao broad topics
 ColdFusion youtube channel
 *** https://www.youtube.com/feeds/videos.xml?channel_id=UC1yNl2E66ZzKApQdRuTQ4tw :knowledge:tech:ai:sabine:
 Sabine Hossenfelder, physicist
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCsBjURrPoezykLs9EqgamOA :fireship:tech:news:
+fireship, tech, news
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCkCGANrihzExmu9QiqZpPlQ :money:
+How money works
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UC68TLK0mAEzUyHx5x5k-S1Q :workout:
+Jeff Nippard, workout, training
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCUyeluBRhGPCW4rPe_UvBZQ :tech:linux:
+The Prime Time
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCHnyfMqiRRG1u-2MsSQLbXA :knowledge:
+Veritasium
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCilwQlk62k1z7aUEZPOB6yw :knowledge:xiaolin:
+小林说， xiaolin
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UCBKDRq35-L8xev4O7ZqBeLg :news:china:
+王志安, Wang Zhian
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UC5DGiN7-nlPno2kjHUdcdCg :knowledge:
+老肉杂谈, laorou
+*** https://www.youtube.com/feeds/videos.xml?channel_id=UC8WCW6C3BWLKSZ5cMzD8Gyw :ai:limu:
+跟李沐学AI
 ** Blogs :blog:
 *** https://tim.blog/feed/ :timferris:
 Tim Ferris author and podcaster
