@@ -47,6 +47,7 @@
     # Developer runtimes / package managers
     ############################################################
     bun
+    uv
   ];
 
   # Syncthing as user service (runs when you're logged in)
