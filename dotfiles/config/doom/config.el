@@ -685,39 +685,38 @@
 )
 
 ;; set up LLMs
-;; with package gptel
-;; (use-package! gptel)
-(defun my-get-api-key (machine)
-  "Retrieve API key for MACHINE from ~/.authinfo emacs support"
-  (let ((entry (car (auth-source-search :host machine :max 1 :require '(:user :secret)))))
-    (when entry
-      (let ((secret (funcall (plist-get entry :secret))))
-        (if (stringp secret) secret (error "Invalid secret for %s" machine)))))
-  ;; (let ((entry (car (auth-source-search :host machine :max 1 :require '(:user :secret)))))
-  ;;   (when entry
-  ;;     (let ((secret (funcall (plist-get entry :secret))))
-  ;;       (if (stringp secret) secret (error "Invalid secret for %s" machine))))))
-
-;; Fetch API keys
-(setq gptel-api-key-openrouter (my-get-api-key "openrouter.ai"))
-         ;; gptel-api-key-openai (my-get-api-key "openai.com")
-         ;; gptel-api-key-gemini (my-get-api-key "generativelanguage.googleapis.com")
-
+;; module llm uses  gptel as the backend
 (after! gptel
-  ;; (gptel-make-openai "OpenAI" :key gptel-api-key-openai :stream t)
-  ;; (gptel-make-gemini "Gemini" :key gptel-api-key-gemini :stream t)
-  (gptel-make-openai "OpenRouter"
-                     :host "openrouter.ai"
-                     :endpoint "/api/v1/chat/completions"
-                     :stream t
-                     :key gptel-api-key-openrouter
-                     :models '(openai/gpt-5.4-mini
-                               google/gemini-3.1-flash-lite-preview
-                               anthropic/claude-sonnet-4.6
-                               ;; anthropic/claude-3.7-sonnet:beta
-                              )
-  )
-)
+  ;; use auth-source to manage API keys
+  (require 'auth-source)
+
+  ;; Clear Doom/gptel default backends such as ChatGPT/OpenAI.
+  (setq gptel--known-backends nil)
+
+  (defun my/openrouter-api-key ()
+    (or (auth-source-pick-first-password
+         :host "openrouter.ai"
+         :user "apikey")
+        (user-error "No OpenRouter API key found for openrouter.ai")))
+
+  (setq gptel-backend
+        (gptel-make-openai "OpenRouter"
+                           :host "openrouter.ai"
+                           :endpoint "/api/v1/chat/completions"
+                           :stream t
+                           ;; :key gptel-api-key-openrouter
+                           :key #'my/openrouter-api-key
+                           :models '(openai/gpt-5.5
+                                     google/gemini-3.5-flash
+                                     anthropic/claude-sonnet-4.8
+                                     deepseek/deepseek-v4-flash
+                                     deepseek/deepseek-v4-pro))
+        ;; Default model
+        gptel-model 'google/gemini-3.5-flash
+
+        ;; Sensible defaults
+        gptel-default-mode 'org-mode
+))
 
 
 ;; programming
@@ -782,7 +781,6 @@
  ;;  ;; Add the function to relevant hooks
  ;;  (add-hook 'lsp-managed-mode-hook #'my/maybe-enable-lsp-ui-imenu)
  ;;  ;; (add-hook 'org-mode-hook (lambda () (lsp-ui-imenu-enable nil)))
-)
 
 ;; denote configuration
 (after! denote
