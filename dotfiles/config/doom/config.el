@@ -709,6 +709,7 @@
                            :models '(openai/gpt-5.5
                                      google/gemini-3.5-flash
                                      anthropic/claude-sonnet-4.8
+                                     moonshotai/kimi-k2.6
                                      deepseek/deepseek-v4-flash
                                      deepseek/deepseek-v4-pro))
         ;; Default model
