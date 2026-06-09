@@ -140,3 +140,6 @@
 
 ;; use denote for note taking
 (package! denote)
+
+;; nix has prebuilt pdf tools, use it over the package in MELPA
+(package! pdf-tools :built-in 'prefer)

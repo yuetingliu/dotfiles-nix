@@ -2,6 +2,11 @@
 
 let
   doomDir = "${config.home.homeDirectory}/.config/emacs";
+
+  emacsWithPackages = pkgs.emacs-pgtk.pkgs.withPackages (epkgs: with epkgs; [
+  # pgtk is pure gtk build supports real background transpaency
+    pdf-tools
+  ]);
 in
 {
   ############################################################
@@ -9,7 +14,7 @@ in
   ############################################################
 
   home.packages = with pkgs; [
-    emacs-pgtk    # pure gtk build supports real background transpaency
+    emacsWithPackages   # defined above to include nix's pdf-tools
 
     git
     ripgrep

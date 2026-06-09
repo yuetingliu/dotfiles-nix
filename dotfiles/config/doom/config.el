@@ -801,3 +801,11 @@
        :desc "Backlinks"     "b" #'denote-backlinks
        :desc "Rename file"   "r" #'denote-rename-file
        :desc "Search notes"  "s" #'consult-ripgrep))
+
+;; Nix-built epdfinfo
+(setq pdf-info-epdfinfo-program
+      (car (file-expand-wildcards
+            "/nix/store/*-emacs-pdf-tools-*/share/emacs/site-lisp/elpa/pdf-tools-*/epdfinfo")))
+
+;; Nix pdf-tools may not expose this autoload to Doom.
+(autoload 'pdf-occur-global-minor-mode "pdf-occur" nil t)
