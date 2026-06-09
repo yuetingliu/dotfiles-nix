@@ -809,3 +809,6 @@
 
 ;; Nix pdf-tools may not expose this autoload to Doom.
 (autoload 'pdf-occur-global-minor-mode "pdf-occur" nil t)
+
+; use xelatex
+(setq org-latex-compiler "xelatex")

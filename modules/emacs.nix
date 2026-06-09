@@ -16,6 +16,10 @@ in
   home.packages = with pkgs; [
     emacsWithPackages   # defined above to include nix's pdf-tools
 
+    # latex
+    texlab
+    texlive.combined.scheme-full
+
     git
     ripgrep
     fd
