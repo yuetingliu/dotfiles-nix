@@ -807,8 +807,26 @@
       (car (file-expand-wildcards
             "/nix/store/*-emacs-pdf-tools-*/share/emacs/site-lisp/elpa/pdf-tools-*/epdfinfo")))
 
+;; add pdf file association
+(add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
 ;; Nix pdf-tools may not expose this autoload to Doom.
 (autoload 'pdf-occur-global-minor-mode "pdf-occur" nil t)
 
 ; use xelatex
 (setq org-latex-compiler "xelatex")
+
+;; set up org export to github flavored md
+(after! org
+  (require 'ox-gfm)
+
+  ;; Put future TODO/DONE history into LOGBOOK drawers
+  (setq org-log-into-drawer t)
+
+  ;; Cleaner Markdown/GFM export
+  (setq org-export-with-toc nil
+        org-export-with-tags nil
+        org-export-with-properties nil
+        org-export-with-timestamps nil
+        org-export-with-todo-keywords nil
+        org-export-with-drawers nil
+        org-export-with-smart-quotes nil))

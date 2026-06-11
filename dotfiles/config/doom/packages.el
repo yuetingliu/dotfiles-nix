@@ -143,3 +143,6 @@
 
 ;; nix has prebuilt pdf tools, use it over the package in MELPA
 (package! pdf-tools :built-in 'prefer)
+
+;; use github flavored markdown for org export to md
+(package! ox-gfm)
