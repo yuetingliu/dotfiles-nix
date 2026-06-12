@@ -788,7 +788,7 @@
   (setq denote-directory (concat org-directory "denote/"))
   (setq denote-file-type 'org)
   (setq denote-known-keywords
-        '("emacs" "org" "ml" "cv" "system" "research" "journal" "idea"))
+        '("emacs" "org" "ml" "cv" "system" "research" "journal" "idea" "information" "reference" "concept" "article" "draft"))
   (setq denote-infer-keywords t)
   (setq denote-sort-keywords t)
   (setq denote-prompts '(title keywords)))
