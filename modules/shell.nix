@@ -27,6 +27,16 @@
 
       alias ll="eza -lah --group-directories-first"
       alias cat="bat"
+
+      # The SSH kitten installs Kitty terminfo and shell integration remotely.
+      if set -q KITTY_PID
+        if command -q kitten
+          alias ssh="kitten ssh"
+        else if command -q kitty
+          # Compatibility with Kitty versions before the standalone kitten binary.
+          alias ssh="kitty +kitten ssh"
+        end
+      end
     '';
   };
 

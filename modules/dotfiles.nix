@@ -20,5 +20,8 @@ in
 
     # Doom user config directory (init.el/config.el/packages.el)
     xdg.configFile."doom".source = oos "${config.dotfiles.repoPath}/dotfiles/config/doom";
+
+    # Kitty terminal config directory
+    xdg.configFile."kitty".source = oos "${config.dotfiles.repoPath}/dotfiles/config/kitty";
   };
 }
