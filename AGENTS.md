@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-This repository defines a Linux development environment with Nix flakes and Home Manager. `flake.nix` pins the `x86_64-linux` system and exposes the `yueting` Home Manager configuration. `home.nix` is the entry point and imports focused modules from `modules/`:
+This repository defines Linux and macOS development environments with Nix flakes and Home Manager. `flake.nix` exposes the standalone `linux` Home Manager configuration and the `macbook-pro` nix-darwin configuration. Shared and platform-specific modules live under `modules/`:
 
 - `shell.nix`, `editor.nix`, and `emacs.nix` configure interactive tools.
 - `tools.nix` and `ui.nix` install shared packages and fonts.
@@ -14,12 +14,12 @@ Application-owned files live under `dotfiles/config/`, currently for Neovim, Doo
 
 - `make check` runs `nix flake check` and should be the first validation step.
 - `make build` builds the Home Manager activation package without applying it.
-- `make apply` activates the current configuration for `PROFILE=yueting`.
+- `make apply` detects the host OS and activates the matching configuration.
 - `make init` bootstraps Home Manager on a fresh machine.
 - `make doctor` reports common Nix, flake, Home Manager, and profile problems.
 - `make update` updates `flake.lock` and applies the result; review lock-file changes before committing.
 
-Override the profile when needed, for example `make build PROFILE=yueting`.
+Override host selectors when needed, for example `make apply-linux LINUX_HOST=linux` or `make apply-mac MAC_HOST=macbook-pro`.
 
 ## Coding Style & Naming Conventions
 

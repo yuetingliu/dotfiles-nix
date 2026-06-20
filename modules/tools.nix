@@ -41,7 +41,6 @@
     # Sync & background tools
     ############################################################
     syncthing
-    keychain
 
     ############################################################
     # Developer runtimes / package managers

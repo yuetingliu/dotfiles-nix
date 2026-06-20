@@ -1,17 +1,24 @@
-{ config, pkgs, ... }:
+{ config, lib, ... }:
 
 let
-  repo = "${config.home.homeDirectory}/dotfiles-nix";
   oos  = config.lib.file.mkOutOfStoreSymlink;
 in
 {
-  ############################################################
-  # Big configs as editable out-of-store symlinks
-  ############################################################
+  options.dotfiles.repoPath = lib.mkOption {
+    type = lib.types.str;
+    default = "${config.home.homeDirectory}/src/dotfiles-nix";
+    description = "Absolute path to this dotfiles repository.";
+  };
 
-  # LazyVim config directory
-  xdg.configFile."nvim".source = oos "${repo}/dotfiles/config/nvim";
+  config = {
+    ############################################################
+    # Big configs as editable out-of-store symlinks
+    ############################################################
 
-  # Doom user config directory (init.el/config.el/packages.el)
-  xdg.configFile."doom".source = oos "${repo}/dotfiles/config/doom";
+    # LazyVim config directory
+    xdg.configFile."nvim".source = oos "${config.dotfiles.repoPath}/dotfiles/config/nvim";
+
+    # Doom user config directory (init.el/config.el/packages.el)
+    xdg.configFile."doom".source = oos "${config.dotfiles.repoPath}/dotfiles/config/doom";
+  };
 }

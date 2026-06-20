@@ -1,23 +1,44 @@
-PROFILE ?= yueting
-FLAKE   := .#$(PROFILE)
+LINUX_HOST  ?= linux
+LINUX_FLAKE := .\#$(LINUX_HOST)
+MAC_HOST    ?= macbook-pro
+MAC_FLAKE   := .\#$(MAC_HOST)
 
-.PHONY: init apply update build check generations rollback doctor
+.PHONY: init init-linux init-mac apply apply-linux apply-mac update build check generations rollback doctor
 
-# Bootstrap on a fresh machine:
-# uses nix run so home-manager does not need to be preinstalled
 init:
-	nix run github:nix-community/home-manager -- switch --flake $(FLAKE)
+	@case "$$(uname -s)" in \
+		Darwin) $(MAKE) init-mac ;; \
+		Linux) $(MAKE) init-linux ;; \
+		*) echo "Unsupported platform: $$(uname -s)"; exit 1 ;; \
+	esac
 
-# Normal day-to-day apply after home-manager is present
+# Bootstrap standalone Home Manager on Linux.
+init-linux:
+	nix run github:nix-community/home-manager -- switch --flake $(LINUX_FLAKE)
+
 apply:
-	home-manager switch --flake $(FLAKE)
+	@case "$$(uname -s)" in \
+		Darwin) $(MAKE) apply-mac ;; \
+		Linux) $(MAKE) apply-linux ;; \
+		*) echo "Unsupported platform: $$(uname -s)"; exit 1 ;; \
+	esac
+
+apply-linux:
+	home-manager switch --flake $(LINUX_FLAKE)
+
+# Bootstrap nix-darwin and its integrated Home Manager configuration.
+init-mac:
+	sudo nix run github:nix-darwin/nix-darwin/nix-darwin-26.05#darwin-rebuild -- switch --flake $(MAC_FLAKE)
+
+apply-mac:
+	sudo darwin-rebuild switch --flake $(MAC_FLAKE)
 
 update:
 	nix flake update
-	home-manager switch --flake $(FLAKE)
+	$(MAKE) apply
 
 build:
-	nix build .#homeConfigurations.$(PROFILE).activationPackage
+	nix build .#homeConfigurations.$(LINUX_HOST).activationPackage
 
 check:
 	nix flake check

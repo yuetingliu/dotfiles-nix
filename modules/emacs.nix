@@ -2,9 +2,9 @@
 
 let
   doomDir = "${config.home.homeDirectory}/.config/emacs";
+  emacs = if pkgs.stdenv.isDarwin then pkgs.emacs else pkgs.emacs-pgtk;
 
-  emacsWithPackages = pkgs.emacs-pgtk.pkgs.withPackages (epkgs: with epkgs; [
-  # pgtk is pure gtk build supports real background transpaency
+  emacsWithPackages = emacs.pkgs.withPackages (epkgs: with epkgs; [
     pdf-tools
   ]);
 in
@@ -14,7 +14,7 @@ in
   ############################################################
 
   home.packages = with pkgs; [
-    emacsWithPackages   # defined above to include nix's pdf-tools
+    emacsWithPackages   # PGTK on Linux; standard Emacs on macOS
 
     # latex
     texlab
