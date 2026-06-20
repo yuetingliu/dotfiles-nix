@@ -3,7 +3,7 @@ LINUX_FLAKE := .\#$(LINUX_HOST)
 MAC_HOST    ?= macbook-pro
 MAC_FLAKE   := .\#$(MAC_HOST)
 
-.PHONY: init init-linux init-mac apply apply-linux apply-mac update build check generations rollback doctor
+.PHONY: init init-linux init-mac apply apply-linux apply-mac update build build-linux build-mac check generations rollback doctor
 
 init:
 	@case "$$(uname -s)" in \
@@ -38,10 +38,20 @@ update:
 	$(MAKE) apply
 
 build:
+	@case "$$(uname -s)" in \
+		Darwin) $(MAKE) build-mac ;; \
+		Linux) $(MAKE) build-linux ;; \
+		*) echo "Unsupported platform: $$(uname -s)"; exit 1 ;; \
+	esac
+
+build-linux:
 	nix build .#homeConfigurations.$(LINUX_HOST).activationPackage
 
+build-mac:
+	nix build .#darwinConfigurations.$(MAC_HOST).system
+
 check:
-	nix flake check
+	nix flake check --all-systems
 
 generations:
 	home-manager generations
