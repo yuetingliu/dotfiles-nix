@@ -110,7 +110,7 @@
 (package! gptel)
 ;; Github Copilot
 (package! copilot
-  :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
+  :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
 
 (package! org-cv
   :recipe (:host gitlab :repo "Titan-C/org-cv" :files ("*.el")))
