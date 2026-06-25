@@ -22,6 +22,8 @@
       "kitty"
       "raycast"
       "spotify"
+      "bitwarden"
+      "chatgpt"
     ];
     onActivation = {
       autoUpdate = true;
