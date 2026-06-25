@@ -11,6 +11,16 @@
   system.primaryUser = "yueting";
   programs.fish.enable = true;
 
+  environment.variables.LIBRARY_PATH = [
+    "/opt/homebrew/opt/gcc/lib/gcc/current"
+    "/opt/homebrew/opt/gcc/lib/gcc/current/gcc/aarch64-apple-darwin25/16"
+  ];
+
+  launchd.user.envVariables.LIBRARY_PATH = [
+    "/opt/homebrew/opt/gcc/lib/gcc/current"
+    "/opt/homebrew/opt/gcc/lib/gcc/current/gcc/aarch64-apple-darwin25/16"
+  ];
+
   fonts.packages = import ./modules/font-packages.nix { inherit pkgs; };
 
   homebrew = {
@@ -20,6 +30,15 @@
         name = "d12frosted/emacs-plus";
         trusted = true;
       }
+    ];
+    brews = [
+      "autoconf"
+      "automake"
+      "gcc"
+      "libgccjit"
+      "libtool"
+      "pkgconf"
+      "poppler"
     ];
     casks = [
       "emacs-plus-app"

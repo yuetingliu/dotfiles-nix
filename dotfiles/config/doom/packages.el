@@ -141,8 +141,10 @@
 ;; use denote for note taking
 (package! denote)
 
-;; nix has prebuilt pdf tools, use it over the package in MELPA
-(package! pdf-tools :built-in 'prefer)
+;; Linux gets pdf-tools from Nix with Emacs. On macOS, leave pdf-tools to
+;; Doom's :tools pdf module so it builds epdfinfo for Emacs Plus.
+(unless (eq system-type 'darwin)
+  (package! pdf-tools :built-in 'prefer))
 
 ;; use github flavored markdown for org export to md
 (package! ox-gfm)

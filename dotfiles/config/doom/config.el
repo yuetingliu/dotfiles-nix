@@ -811,7 +811,9 @@
     (setq pdf-info-epdfinfo-program nix-epdfinfo)))
 
 ;; add pdf file association
-(add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
+(autoload 'pdf-view-mode "pdf-view" nil t)
+(add-to-list 'auto-mode-alist '("\\.[pP][dD][fF]\\'" . pdf-view-mode))
+(add-to-list 'magic-mode-alist '("%PDF" . pdf-view-mode))
 ;; Nix pdf-tools may not expose this autoload to Doom.
 (autoload 'pdf-occur-global-minor-mode "pdf-occur" nil t)
 
