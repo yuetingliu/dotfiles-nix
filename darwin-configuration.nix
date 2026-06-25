@@ -15,7 +15,14 @@
 
   homebrew = {
     enable = true;
+    taps = [
+      {
+        name = "d12frosted/emacs-plus";
+        trusted = true;
+      }
+    ];
     casks = [
+      "emacs-plus-app"
       "brave-browser"
       "dropbox"
       "ghostty"

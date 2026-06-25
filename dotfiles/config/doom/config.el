@@ -802,10 +802,13 @@
        :desc "Rename file"   "r" #'denote-rename-file
        :desc "Search notes"  "s" #'consult-ripgrep))
 
-;; Nix-built epdfinfo
-(setq pdf-info-epdfinfo-program
-      (car (file-expand-wildcards
-            "/nix/store/*-emacs-pdf-tools-*/share/emacs/site-lisp/elpa/pdf-tools-*/epdfinfo")))
+;; Prefer Nix-built epdfinfo when it exists. On macOS, Emacs Plus lets Doom
+;; build pdf-tools and use the package-local epdfinfo instead.
+(let ((nix-epdfinfo
+       (car (file-expand-wildcards
+             "/nix/store/*-emacs-pdf-tools-*/share/emacs/site-lisp/elpa/pdf-tools-*/epdfinfo"))))
+  (when (and nix-epdfinfo (file-executable-p nix-epdfinfo))
+    (setq pdf-info-epdfinfo-program nix-epdfinfo)))
 
 ;; add pdf file association
 (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))

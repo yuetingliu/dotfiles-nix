@@ -1,10 +1,8 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   doomDir = "${config.home.homeDirectory}/.config/emacs";
-  emacs = if pkgs.stdenv.isDarwin then pkgs.emacs else pkgs.emacs-pgtk;
-
-  emacsWithPackages = emacs.pkgs.withPackages (epkgs: with epkgs; [
+  linuxEmacs = pkgs.emacs-pgtk.pkgs.withPackages (epkgs: with epkgs; [
     pdf-tools
   ]);
 in
@@ -13,9 +11,9 @@ in
   # Emacs + Doom prerequisites
   ############################################################
 
-  home.packages = with pkgs; [
-    emacsWithPackages   # PGTK on Linux; standard Emacs on macOS
-
+  home.packages = lib.optionals pkgs.stdenv.isLinux [
+    linuxEmacs   # macOS uses Homebrew Emacs Plus from nix-darwin.
+  ] ++ (with pkgs; [
     # latex
     texlab
     texlive.combined.scheme-full
@@ -34,7 +32,7 @@ in
     nodejs
     python3
     sqlite
-  ];
+  ]);
 
   ############################################################
   # Ensure Doom framework is present (~/.config/emacs)
