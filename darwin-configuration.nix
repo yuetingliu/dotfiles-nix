@@ -21,6 +21,20 @@
     "/opt/homebrew/opt/gcc/lib/gcc/current/gcc/aarch64-apple-darwin25/16"
   ];
 
+  # GUI apps launched from Spotlight/Raycast do not inherit shell startup files.
+  # Keep their PATH aligned with Nix, Homebrew, and macOS system paths.
+  launchd.user.envVariables.PATH = [
+    "/etc/profiles/per-user/yueting/bin"
+    "/run/current-system/sw/bin"
+    "/opt/homebrew/bin"
+    "/opt/homebrew/sbin"
+    "/usr/local/bin"
+    "/usr/bin"
+    "/bin"
+    "/usr/sbin"
+    "/sbin"
+  ];
+
   fonts.packages = import ./modules/font-packages.nix { inherit pkgs; };
 
   homebrew = {
@@ -28,6 +42,10 @@
     taps = [
       {
         name = "d12frosted/emacs-plus";
+        trusted = true;
+      }
+      {
+        name = "nikitabobko/tap";
         trusted = true;
       }
     ];
@@ -41,6 +59,7 @@
       "poppler"
     ];
     casks = [
+      "nikitabobko/tap/aerospace"
       "emacs-plus-app"
       "brave-browser"
       "dropbox"
