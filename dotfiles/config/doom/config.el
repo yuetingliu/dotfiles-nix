@@ -104,6 +104,14 @@
 (setq user-full-name "Yueting Liu"
       user-mail-address "yueting1106.liu@gmail.com")
 
+;; Keep only Option/Alt as Super on macOS. Command is Meta so Command+Option
+;; remains distinguishable from plain Meta keybindings.
+(when (eq system-type 'darwin)
+  (setq mac-option-modifier 'super
+        ns-option-modifier 'super
+        mac-command-modifier 'meta
+        ns-command-modifier 'meta))
+
 ;; set up elfeed feeds
 (setq rmh-elfeed-org-files (list "~/.config/doom/elfeed.org"))
 ;; set database location
