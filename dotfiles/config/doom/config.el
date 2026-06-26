@@ -142,8 +142,11 @@
 ;; (setq doom-font (font-spec :family "MesloLGS NF" :size 13 :weight 'semi-light)
 ;; (setq doom-symbol-font (font-spec :family "FiraCode Nerd Font Propo"))
 ;; (setq doom-font (font-spec :family "FiraCode Nerd Font Propo"))
-(setq doom-symbol-font (font-spec :family "Iosevka" :size 13.0))
-(setq doom-font (font-spec :family "Iosevka" :size 12.0))
+(if (eq system-type 'darwin)
+    (setq doom-symbol-font (font-spec :family "Iosevka" :size 15.0)
+          doom-font (font-spec :family "Iosevka" :size 14.0))
+  (setq doom-symbol-font (font-spec :family "Iosevka" :size 13.0)
+        doom-font (font-spec :family "Iosevka" :size 12.0)))
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
@@ -591,9 +594,24 @@
 ;;  (global-org-modern-mode)
 ;;  ;; (add-hook 'org-mode-hook #'org-modern-mode)
 
+;; macOS/NS frames need explicit frame parameters for title bar and opacity.
+(when (eq system-type 'darwin)
+  (setq ns-use-proxy-icon nil
+        frame-title-format nil)
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark))
+  ;; (add-to-list 'default-frame-alist '(undecorated . t))
+
+  (set-frame-parameter nil 'ns-transparent-titlebar t)
+  (set-frame-parameter nil 'ns-appearance 'dark))
+ ;; (set-frame-parameter nil 'undecorated t))
+
 ;; set transparency
+(set-frame-parameter nil 'alpha 90) ; For current frame
 (set-frame-parameter nil 'alpha-background 90) ; For current frame
+;; (set-frame-parameter nil 'alpha 100) ; For current frame no transparency
 ;; (set-frame-parameter nil 'alpha-background 100) ; For current frame no transparency
+(add-to-list 'default-frame-alist '(alpha . 90)) ; For all new frames henceforth
 (add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
 
 ;; auto revert buffer
