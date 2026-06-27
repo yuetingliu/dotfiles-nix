@@ -44,10 +44,6 @@
         name = "d12frosted/emacs-plus";
         trusted = true;
       }
-      {
-        name = "nikitabobko/tap";
-        trusted = true;
-      }
     ];
     brews = [
       "autoconf"
@@ -59,7 +55,6 @@
       "poppler"
     ];
     casks = [
-      "nikitabobko/tap/aerospace"
       "emacs-plus-app"
       "brave-browser"
       "dropbox"

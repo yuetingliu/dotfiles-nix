@@ -23,8 +23,5 @@ in
 
     # Kitty terminal config directory
     xdg.configFile."kitty".source = oos "${config.dotfiles.repoPath}/dotfiles/config/kitty";
-
-    # AeroSpace tiling window manager config
-    xdg.configFile."aerospace".source = oos "${config.dotfiles.repoPath}/dotfiles/config/aerospace";
   };
 }
