@@ -9,6 +9,7 @@
   };
 
   home.sessionPath = [
+    "${config.home.homeDirectory}/.local/bin"
     "${config.home.homeDirectory}/.config/emacs/bin"
     "${config.home.homeDirectory}/.bun/bin"
   ];
