@@ -614,13 +614,13 @@
   (set-frame-parameter nil 'ns-appearance 'dark))
  ;; (set-frame-parameter nil 'undecorated t))
 
-;; set transparency
-(set-frame-parameter nil 'alpha 90) ; For current frame
-(set-frame-parameter nil 'alpha-background 90) ; For current frame
-;; (set-frame-parameter nil 'alpha 100) ; For current frame no transparency
-;; (set-frame-parameter nil 'alpha-background 100) ; For current frame no transparency
-(add-to-list 'default-frame-alist '(alpha . 90)) ; For all new frames henceforth
-(add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
+;; ;; set transparency
+;; (set-frame-parameter nil 'alpha 95) ; For current frame
+;; (set-frame-parameter nil 'alpha-background 95) ; For current frame
+;; ;; (set-frame-parameter nil 'alpha 100) ; For current frame no transparency
+;; ;; (set-frame-parameter nil 'alpha-background 100) ; For current frame no transparency
+;; (add-to-list 'default-frame-alist '(alpha . 90)) ; For all new frames henceforth
+;; (add-to-list 'default-frame-alist '(alpha-background . 90)) ; For all new frames henceforth
 
 ;; auto revert buffer
 (global-auto-revert-mode 1)
