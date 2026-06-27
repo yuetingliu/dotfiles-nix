@@ -4,6 +4,7 @@
     ./ui.nix
     ./editor.nix
     ./emacs.nix
+    ./terminal.nix
     ./tools.nix
     ./dotfiles.nix
   ];

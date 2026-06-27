@@ -20,12 +20,5 @@ in
 
     # Doom user config directory (init.el/config.el/packages.el)
     xdg.configFile."doom".source = oos "${config.dotfiles.repoPath}/dotfiles/config/doom";
-
-    # Kitty terminal config. Keep the main config editable, and generate only
-    # the platform-specific shell path.
-    xdg.configFile."kitty/kitty.conf".source = oos "${config.dotfiles.repoPath}/dotfiles/config/kitty/kitty.conf";
-    xdg.configFile."kitty/local.conf".text = ''
-      shell ${config.home.profileDirectory}/bin/fish
-    '';
   };
 }
