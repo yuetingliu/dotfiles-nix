@@ -23,6 +23,21 @@
 
   fonts.packages = import ./modules/font-packages.nix { inherit pkgs; };
 
+  # Keep Spaces stable and make native window management feel closer to a
+  # lightweight tiling workflow without replacing the macOS window manager.
+  system.defaults = {
+    dock.mru-spaces = false;
+    spaces.spans-displays = false;
+
+    WindowManager = {
+      GloballyEnabled = false;
+      EnableTiledWindowMargins = true;
+      EnableTilingByEdgeDrag = true;
+      EnableTilingOptionAccelerator = true;
+      EnableTopTilingByEdgeDrag = true;
+    };
+  };
+
   homebrew = {
     enable = true;
     taps = [
