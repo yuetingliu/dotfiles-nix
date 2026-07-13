@@ -46,8 +46,10 @@
       "dropbox"
       "ghostty"
       "kitty"
+      "microsoft-teams"
       "raycast"
       "spotify"
+      "zoom"
       "bitwarden"
       "chatgpt"
     ];
