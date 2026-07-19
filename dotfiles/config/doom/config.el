@@ -569,8 +569,11 @@
 ;; set global python interpreter
 ;; (setq org-babel-python-command "/home/yueting/.pyenv/versions/3.10.12/bin/python")
 
-;; set browser to system default browser
-(setq browse-url-browser-function 'browse-url-xdg-open)
+;; Set browser to system default browser based on OS
+(setq browse-url-browser-function
+      (if (eq system-type 'darwin)
+          'browse-url-default-macosx-browser
+        'browse-url-xdg-open))
 
 ;; make workspaces always visible
 (after! doom-modeline
