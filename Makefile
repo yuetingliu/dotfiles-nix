@@ -36,6 +36,9 @@ apply-mac:
 update:
 	nix flake update
 	$(MAKE) apply
+	@if [ "$$(uname -s)" = "Darwin" ]; then \
+		HOMEBREW_NO_AUTO_UPDATE=1 brew bundle install; \
+	fi
 
 build:
 	@case "$$(uname -s)" in \

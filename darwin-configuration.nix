@@ -69,9 +69,16 @@
       "chatgpt"
     ];
     onActivation = {
-      autoUpdate = true;
-      upgrade = true;
+      # Homebrew itself and upgrades are pinned by flake.lock. This keeps
+      # darwin-rebuild idempotent and avoids mixing a pinned brew client with
+      # newer, imperatively fetched cask metadata.
+      autoUpdate = false;
+      upgrade = false;
     };
+
+    # Expose nix-darwin's generated Brewfile for the explicit `make update`
+    # workflow. Regular activation remains non-updating.
+    global.brewfile = true;
   };
 
   system.stateVersion = 6;

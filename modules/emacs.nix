@@ -32,6 +32,10 @@ in
     nodejs
     python3
     sqlite
+
+    # Doom's :spell module finds this wrapped binary and its dictionaries via
+    # PATH. Add languages here as needed.
+    (hunspell.withDicts (dicts: [ dicts.en_US ]))
   ]);
 
   ############################################################

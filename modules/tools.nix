@@ -46,8 +46,19 @@
     # Developer runtimes / package managers
     ############################################################
     bun
-    uv
+    uv       # Python package and project manager
+    mise     # Runtime and task manager
+
+    ############################################################
+    # Terminal multiplexing
+    ############################################################
+    tmux
+    byobu
   ];
+
+  # Byobu supports screen and tmux backends. Keep its stateful user config
+  # explicit so a new machine consistently opens tmux sessions.
+  home.file.".byobu/backend".text = "BYOBU_BACKEND=tmux\n";
 
   # Syncthing as user service (runs when you're logged in)
   services.syncthing.enable = true;

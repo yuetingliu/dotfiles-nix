@@ -8,6 +8,8 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    # Keep Nix-managed Homebrew compatible with the current cask DSL.
+    nix-homebrew.inputs.brew-src.url = "github:Homebrew/brew";
   };
 
   outputs = { self, nixpkgs, home-manager, nix-darwin, nix-homebrew, ... }:
