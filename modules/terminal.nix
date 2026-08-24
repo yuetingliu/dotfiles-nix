@@ -33,6 +33,7 @@ ${kittyTabBindings}
 
     command = ${config.home.profileDirectory}/bin/fish
     shell-integration = fish
+    shell-integration-features = ssh-env,ssh-terminfo
 
     config-file = local.conf
   '';
@@ -44,7 +45,7 @@ in
     oos "${config.dotfiles.repoPath}/dotfiles/config/kitty/local.conf";
 
   # Ghostty: stable cross-platform baseline from Nix; editable overlay in repo.
-  xdg.configFile."ghostty/config.ghostty".text = ghosttyConfig;
+  xdg.configFile."ghostty/config".text = ghosttyConfig;
   xdg.configFile."ghostty/local.conf".source =
     oos "${config.dotfiles.repoPath}/dotfiles/config/ghostty/local.conf";
 }
