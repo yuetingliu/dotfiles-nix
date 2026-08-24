@@ -39,6 +39,16 @@ ${kittyTabBindings}
   '';
 in
 {
+  # Ghostty itself is installed separately (nix-homebrew on macOS). Home
+  # Manager sources Ghostty's bundled Fish integration after Nix initializes
+  # the shell, avoiding automatic XDG_DATA_DIRS injection being overwritten.
+  programs.ghostty = {
+    enable = true;
+    package = null;
+    enableFishIntegration = true;
+    systemd.enable = false;
+  };
+
   # Kitty: stable cross-platform baseline from Nix; editable overlay in repo.
   xdg.configFile."kitty/kitty.conf".text = kittyConfig;
   xdg.configFile."kitty/local.conf".source =

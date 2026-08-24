@@ -7,18 +7,6 @@ let
     # dotfiles/config/fish/local.fish.
 
     if status is-interactive
-      # nix-darwin's Fish pre-initialization replaces XDG_DATA_DIRS before Fish
-      # can discover Ghostty's injected vendor configuration. The marker is
-      # erased when automatic discovery succeeds, so only source the bundled
-      # integration here when that discovery was skipped.
-      if set -q GHOSTTY_SHELL_INTEGRATION_XDG_DIR
-        set -l ghosttyFishIntegration \
-          "$GHOSTTY_RESOURCES_DIR/shell-integration/fish/vendor_conf.d/ghostty-shell-integration.fish"
-        if test -r "$ghosttyFishIntegration"
-          source "$ghosttyFishIntegration"
-        end
-      end
-
       set -gx EDITOR nvim
       set -gx VISUAL nvim
       set -gx SHELL (command -v fish)
