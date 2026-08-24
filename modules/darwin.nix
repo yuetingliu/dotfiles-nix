@@ -26,6 +26,14 @@ in
       /bin/launchctl setenv PATH "${guiPathString}"
     '';
 
+  # Store SSH key passphrases in the macOS Keychain and load the corresponding
+  # identities into the launchd-managed agent. Once loaded, keys are available
+  # even to SSH invocations that replace the normal config with `ssh -F`.
+  programs.ssh.matchBlocks."*" = {
+    addKeysToAgent = "yes";
+    extraOptions.UseKeychain = "yes";
+  };
+
   launchd.agents.set-gui-path = {
     enable = true;
     config = {
@@ -38,6 +46,20 @@ in
       RunAtLoad = true;
       StandardOutPath = "/tmp/home-manager-set-gui-path.log";
       StandardErrorPath = "/tmp/home-manager-set-gui-path.err.log";
+    };
+  };
+
+  launchd.agents.load-ssh-keychain = {
+    enable = true;
+    config = {
+      ProgramArguments = [
+        "/usr/bin/ssh-add"
+        "--apple-load-keychain"
+      ];
+      RunAtLoad = true;
+      ProcessType = "Background";
+      StandardOutPath = "/tmp/home-manager-load-ssh-keychain.log";
+      StandardErrorPath = "/tmp/home-manager-load-ssh-keychain.err.log";
     };
   };
 }
