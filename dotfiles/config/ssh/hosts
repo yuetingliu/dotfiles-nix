@@ -1,0 +1,2 @@
+# Shared SSH host definitions. Keep credentials and machine-local entries out
+# of this file; put them in ~/.ssh/hosts.local instead.

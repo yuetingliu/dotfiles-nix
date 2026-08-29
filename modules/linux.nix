@@ -1,9 +1,6 @@
 { lib, pkgs, ... }:
 
 {
-  home.username = "yueting";
-  home.homeDirectory = "/home/yueting";
-
   home.packages = [ pkgs.keychain ];
 
   programs.fish.interactiveShellInit = lib.mkAfter ''

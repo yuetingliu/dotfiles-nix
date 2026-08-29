@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, userName, ... }:
 
 {
   # Determinate manages the Nix daemon and /etc/nix configuration.
@@ -7,8 +7,8 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
   nixpkgs.config.allowUnfree = true;
 
-  users.users.yueting.home = "/Users/yueting";
-  system.primaryUser = "yueting";
+  users.users.${userName}.home = "/Users/${userName}";
+  system.primaryUser = userName;
   programs.fish.enable = true;
 
   environment.variables.LIBRARY_PATH = [

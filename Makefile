@@ -14,7 +14,7 @@ init:
 
 # Bootstrap standalone Home Manager on Linux.
 init-linux:
-	nix run github:nix-community/home-manager -- switch --flake $(LINUX_FLAKE)
+	nix run .#home-manager -- switch --flake $(LINUX_FLAKE)
 
 apply:
 	@case "$$(uname -s)" in \
@@ -24,14 +24,14 @@ apply:
 	esac
 
 apply-linux:
-	home-manager switch --flake $(LINUX_FLAKE)
+	nix run .#home-manager -- switch --flake $(LINUX_FLAKE)
 
 # Bootstrap nix-darwin and its integrated Home Manager configuration.
 init-mac:
-	sudo nix run github:nix-darwin/nix-darwin/nix-darwin-26.05#darwin-rebuild -- switch --flake $(MAC_FLAKE)
+	sudo nix run .#darwin-rebuild -- switch --flake $(MAC_FLAKE)
 
 apply-mac:
-	sudo darwin-rebuild switch --flake $(MAC_FLAKE)
+	sudo nix run .#darwin-rebuild -- switch --flake $(MAC_FLAKE)
 
 update:
 	nix flake update
@@ -57,11 +57,20 @@ check:
 	nix flake check --all-systems
 
 generations:
-	home-manager generations
+	@case "$$(uname -s)" in \
+		Darwin) darwin-rebuild --list-generations ;; \
+		Linux) nix run .#home-manager -- generations ;; \
+		*) echo "Unsupported platform: $$(uname -s)"; exit 1 ;; \
+	esac
 
 # usage: make rollback GEN=3
 rollback:
-	home-manager switch --generation $(GEN)
+	@case "$$(uname -s)" in \
+		Darwin) sudo darwin-rebuild --rollback ;; \
+		Linux) test -n "$(GEN)" || { echo "Usage: make rollback GEN=<generation>"; exit 1; }; \
+			nix run .#home-manager -- switch --generation $(GEN) ;; \
+		*) echo "Unsupported platform: $$(uname -s)"; exit 1 ;; \
+	esac
 
 # Quick environment diagnostics
 doctor:
@@ -75,7 +84,7 @@ doctor:
 	@nix flake show || echo "Flake evaluation failed"
 
 	@echo "=== Checking Home Manager ==="
-	@command -v home-manager >/dev/null && home-manager --version || echo "Home Manager not installed (run make init)"
+	@nix run .#home-manager -- --version || echo "Home Manager command failed (run make init)"
 
 	@echo "=== Checking profile packages ==="
 	@nix profile list || true

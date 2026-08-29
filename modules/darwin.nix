@@ -15,9 +15,6 @@ let
   guiPathString = lib.concatStringsSep ":" guiPath;
 in
 {
-  home.username = "yueting";
-  home.homeDirectory = "/Users/yueting";
-
   # GUI apps launched from Spotlight/Raycast do not inherit shell startup files.
   # Set user launchd PATH from Home Manager so apps like Kitty can resolve
   # commands from the Nix user profile without changing the account login shell.
