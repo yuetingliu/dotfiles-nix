@@ -22,12 +22,14 @@ The path may contain a symlink. For example, keeping the real data under
 `~/data` works with:
 
 ```sh
+mkdir -p ~/data/src
 ln -s ~/data/src ~/src
 git clone <repository-url> ~/src/dotfiles-nix
 ```
 
 Create the parent-path symlink before the first activation. If the repository
-must live at another logical path, override `dotfiles.repoPath` instead.
+must live at another logical path, override `dotfiles.repoPath` instead. If
+`~/src` already exists, inspect it first rather than running `ln` again.
 
 ## First installation
 
@@ -57,6 +59,11 @@ Linux GUI applications are installed as user Flatpaks. The desktop environment
 must provide working XDG desktop portals; most standard Fedora installations do
 so already.
 
+Ghostty and Kitty configuration is managed on both platforms, but their Linux
+applications are intentionally not installed by this flake. Install a terminal
+separately on Linux before expecting those configurations to be usable. On
+macOS, nix-darwin installs both applications through Homebrew.
+
 ## Routine commands
 
 ```sh
@@ -70,8 +77,10 @@ make rollback       # macOS: roll back the nix-darwin system
 ```
 
 Run `make update` only when deliberately updating locked inputs. Review
-`flake.lock` afterward. On macOS this command also upgrades packages declared in
-the generated Homebrew Brewfile; regular `make apply` does not upgrade them.
+`flake.lock` afterward. On macOS this command also refreshes Homebrew metadata
+and upgrades packages declared in the newly evaluated nix-darwin Brewfile.
+Homebrew package versions are intentionally not pinned in `flake.lock`; regular
+`make apply` does not update or upgrade them.
 
 ## Why Linux commands use `nix run`
 

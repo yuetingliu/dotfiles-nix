@@ -37,7 +37,9 @@ update:
 	nix flake update
 	$(MAKE) apply
 	@if [ "$$(uname -s)" = "Darwin" ]; then \
-		HOMEBREW_NO_AUTO_UPDATE=1 brew bundle install; \
+		brewfile="$$(nix eval --raw .#darwinConfigurations.$(MAC_HOST).config.environment.variables.HOMEBREW_BUNDLE_FILE)"; \
+		HOMEBREW_NO_AUTO_UPDATE=1 brew update; \
+		HOMEBREW_NO_AUTO_UPDATE=1 brew bundle install --file="$$brewfile"; \
 	fi
 
 build:
@@ -58,7 +60,7 @@ check:
 
 generations:
 	@case "$$(uname -s)" in \
-		Darwin) darwin-rebuild --list-generations ;; \
+		Darwin) nix run .#darwin-rebuild -- --list-generations ;; \
 		Linux) nix run .#home-manager -- generations ;; \
 		*) echo "Unsupported platform: $$(uname -s)"; exit 1 ;; \
 	esac
@@ -66,7 +68,7 @@ generations:
 # usage: make rollback GEN=3
 rollback:
 	@case "$$(uname -s)" in \
-		Darwin) sudo darwin-rebuild --rollback ;; \
+		Darwin) sudo nix run .#darwin-rebuild -- --rollback ;; \
 		Linux) test -n "$(GEN)" || { echo "Usage: make rollback GEN=<generation>"; exit 1; }; \
 			nix run .#home-manager -- switch --generation $(GEN) ;; \
 		*) echo "Unsupported platform: $$(uname -s)"; exit 1 ;; \
@@ -86,8 +88,20 @@ doctor:
 	@echo "=== Checking Home Manager ==="
 	@nix run .#home-manager -- --version || echo "Home Manager command failed (run make init)"
 
-	@echo "=== Checking profile packages ==="
-	@nix profile list || true
+	@echo "=== Checking active generations and GUI applications ==="
+	@case "$$(uname -s)" in \
+		Darwin) \
+			nix run .#darwin-rebuild -- --list-generations; \
+			echo "--- Homebrew formulae ---"; \
+			command -v brew >/dev/null && brew list --formula || echo "Homebrew not available"; \
+			echo "--- Homebrew casks ---"; \
+			command -v brew >/dev/null && brew list --cask || echo "Homebrew not available" ;; \
+		Linux) \
+			nix run .#home-manager -- generations; \
+			echo "--- Flatpak applications ---"; \
+			command -v flatpak >/dev/null && flatpak list --app --columns=application,name,version || echo "Flatpak not available" ;; \
+		*) echo "Unsupported platform: $$(uname -s)" ;; \
+	esac
 
 	@echo "=== Checking garbage collection status ==="
 	@nix store gc --dry-run || true

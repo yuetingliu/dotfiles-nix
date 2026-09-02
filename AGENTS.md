@@ -77,19 +77,20 @@ changes, especially application-managed lock files such as LazyVim's
   `make build-linux LINUX_HOST=linux` or `make build-mac MAC_HOST=macbook-pro`
   when an explicit target is needed.
 - `make apply` selects the current OS and mutates the active environment.
-  `make apply-linux` uses `home-manager switch`; `make apply-mac` uses
-  `sudo darwin-rebuild switch`.
+  `make apply-linux` uses the Home Manager app exported from the locked flake;
+  `make apply-mac` similarly uses the locked nix-darwin app with `sudo`.
 - `make init` bootstraps the platform-specific manager; `make doctor` reports
   local Nix/Home Manager diagnostics.
 - `make update` runs `nix flake update`, applies the result, then upgrades only
   the formulae and casks declared in nix-darwin's generated Brewfile on macOS.
   Review every `flake.lock` change before committing.
 
-Homebrew itself is installed by `nix-homebrew` and pinned through `flake.lock`.
-Keep `homebrew.onActivation.autoUpdate` and `upgrade` disabled: update the
-relevant flake input deliberately instead of mixing a pinned Homebrew client with
-newer cask metadata during activation. Regular `make apply` never upgrades
-Homebrew packages; use `make update` for that explicit action.
+Homebrew itself is installed by `nix-homebrew`, and its client source is pinned
+through `flake.lock`; formula and cask versions are intentionally not pinned.
+Keep `homebrew.onActivation.autoUpdate` and `upgrade` disabled so regular
+activation remains idempotent. `make update` explicitly refreshes Homebrew
+metadata and upgrades only the formulae and casks declared in nix-darwin's
+newly evaluated generated Brewfile.
 
 For Nix changes, run `make check` and the relevant non-mutating build command.
 For application configuration, also start the affected application after an

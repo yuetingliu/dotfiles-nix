@@ -69,9 +69,10 @@
       "chatgpt"
     ];
     onActivation = {
-      # Homebrew itself and upgrades are pinned by flake.lock. This keeps
-      # darwin-rebuild idempotent and avoids mixing a pinned brew client with
-      # newer, imperatively fetched cask metadata.
+      # Regular activation installs missing declarations but does not refresh
+      # Homebrew metadata or upgrade existing packages. `make update` performs
+      # those mutable operations explicitly; package versions are intentionally
+      # not pinned by flake.lock.
       autoUpdate = false;
       upgrade = false;
     };
