@@ -11,14 +11,14 @@
   system.primaryUser = userName;
   programs.fish.enable = true;
 
+  # Homebrew maintains `current` across GCC upgrades. Avoid embedding the GCC
+  # major or Darwin ABI, both of which change independently of this config.
   environment.variables.LIBRARY_PATH = [
     "/opt/homebrew/opt/gcc/lib/gcc/current"
-    "/opt/homebrew/opt/gcc/lib/gcc/current/gcc/aarch64-apple-darwin25/16"
   ];
 
   launchd.user.envVariables.LIBRARY_PATH = [
     "/opt/homebrew/opt/gcc/lib/gcc/current"
-    "/opt/homebrew/opt/gcc/lib/gcc/current/gcc/aarch64-apple-darwin25/16"
   ];
 
   fonts.packages = import ./modules/font-packages.nix { inherit pkgs; };

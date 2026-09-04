@@ -26,9 +26,9 @@ in
   # Store SSH key passphrases in the macOS Keychain and load the corresponding
   # identities into the launchd-managed agent. Once loaded, keys are available
   # even to SSH invocations that replace the normal config with `ssh -F`.
-  programs.ssh.matchBlocks."*" = {
-    addKeysToAgent = "yes";
-    extraOptions.UseKeychain = "yes";
+  programs.ssh.settings."*" = {
+    AddKeysToAgent = "yes";
+    UseKeychain = "yes";
   };
 
   launchd.agents.set-gui-path = {

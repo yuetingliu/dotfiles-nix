@@ -1,0 +1,7 @@
+# Nix build output symlink.
+/result
+
+# LazyVim updates these as plugins and local extras change. They are runtime
+# state rather than a reproducibility contract for this configuration.
+dotfiles/config/nvim/lazy-lock.json
+dotfiles/config/nvim/lazyvim.json

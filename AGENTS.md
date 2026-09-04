@@ -81,9 +81,9 @@ changes, especially application-managed lock files such as LazyVim's
   `make apply-mac` similarly uses the locked nix-darwin app with `sudo`.
 - `make init` bootstraps the platform-specific manager; `make doctor` reports
   local Nix/Home Manager diagnostics.
-- `make update` runs `nix flake update`, applies the result, then upgrades only
-  the formulae and casks declared in nix-darwin's generated Brewfile on macOS.
-  Review every `flake.lock` change before committing.
+- `make update` runs `nix flake update`, checks and builds the result, applies it,
+  then upgrades only the formulae and casks declared in nix-darwin's generated
+  Brewfile on macOS. Review every `flake.lock` change before committing.
 
 Homebrew itself is installed by `nix-homebrew`, and its client source is pinned
 through `flake.lock`; formula and cask versions are intentionally not pinned.

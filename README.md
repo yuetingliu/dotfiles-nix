@@ -5,9 +5,10 @@ Personal development environment for:
 - x86-64 Linux using standalone Home Manager
 - Apple Silicon macOS using nix-darwin and Home Manager
 
-The flake lock file pins Nixpkgs, Home Manager, nix-darwin, nix-homebrew, and
-nix-flatpak. Bootstrap commands use those locked tools rather than unrelated
-global versions.
+Linux and macOS use the platform-specific Nixpkgs branches from the same stable
+release. The flake lock file pins Nixpkgs, Home Manager, nix-darwin,
+nix-homebrew, and nix-flatpak. Bootstrap commands use those locked tools rather
+than unrelated global versions.
 
 ## Repository location
 
@@ -76,9 +77,11 @@ make rollback GEN=3 # Linux: activate generation 3
 make rollback       # macOS: roll back the nix-darwin system
 ```
 
-Run `make update` only when deliberately updating locked inputs. Review
-`flake.lock` afterward. On macOS this command also refreshes Homebrew metadata
-and upgrades packages declared in the newly evaluated nix-darwin Brewfile.
+Run `make update` only when deliberately updating locked inputs. It checks and
+builds the updated configuration before activation; a failure leaves the new
+lock file for inspection but does not activate it. Review `flake.lock`
+afterward. On macOS this command also refreshes Homebrew metadata and upgrades
+packages declared in the newly evaluated nix-darwin Brewfile.
 Homebrew package versions are intentionally not pinned in `flake.lock`; regular
 `make apply` does not update or upgrade them.
 

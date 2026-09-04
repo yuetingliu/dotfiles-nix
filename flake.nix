@@ -2,12 +2,16 @@
   description = "Yueting's dev environment (Nix + Home Manager + flakes)";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    home-manager.url = "github:nix-community/home-manager";
+    # Use each platform's binary-cached Nixpkgs branch from the same stable
+    # release. Keeping separate inputs avoids making Linux consume the Darwin
+    # branch (or vice versa) merely to satisfy nix-darwin's release check.
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
+    home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-flatpak.url = "github:gmodena/nix-flatpak/v0.7.0";
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     # Keep Nix-managed Homebrew compatible with the current cask DSL.
     nix-homebrew.inputs.brew-src.url = "github:Homebrew/brew";

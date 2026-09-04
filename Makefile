@@ -3,18 +3,11 @@ LINUX_FLAKE := .\#$(LINUX_HOST)
 MAC_HOST    ?= macbook-pro
 MAC_FLAKE   := .\#$(MAC_HOST)
 
-.PHONY: init init-linux init-mac apply apply-linux apply-mac update build build-linux build-mac check generations rollback doctor
+.PHONY: init apply apply-linux apply-mac update build build-linux build-mac check generations rollback doctor
 
-init:
-	@case "$$(uname -s)" in \
-		Darwin) $(MAKE) init-mac ;; \
-		Linux) $(MAKE) init-linux ;; \
-		*) echo "Unsupported platform: $$(uname -s)"; exit 1 ;; \
-	esac
-
-# Bootstrap standalone Home Manager on Linux.
-init-linux:
-	nix run .#home-manager -- switch --flake $(LINUX_FLAKE)
+# The first switch bootstraps Home Manager or nix-darwin; subsequent switches
+# apply updates, so initialization and activation use the same operation.
+init: apply
 
 apply:
 	@case "$$(uname -s)" in \
@@ -26,15 +19,13 @@ apply:
 apply-linux:
 	nix run .#home-manager -- switch --flake $(LINUX_FLAKE)
 
-# Bootstrap nix-darwin and its integrated Home Manager configuration.
-init-mac:
-	sudo nix run .#darwin-rebuild -- switch --flake $(MAC_FLAKE)
-
 apply-mac:
 	sudo nix run .#darwin-rebuild -- switch --flake $(MAC_FLAKE)
 
 update:
 	nix flake update
+	$(MAKE) check
+	$(MAKE) build
 	$(MAKE) apply
 	@if [ "$$(uname -s)" = "Darwin" ]; then \
 		brewfile="$$(nix eval --raw .#darwinConfigurations.$(MAC_HOST).config.environment.variables.HOMEBREW_BUNDLE_FILE)"; \
