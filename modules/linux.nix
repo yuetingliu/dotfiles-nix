@@ -1,6 +1,8 @@
 { lib, pkgs, ... }:
 
 {
+  imports = [ ./gnome.nix ];
+
   home.packages = [ pkgs.keychain ];
 
   programs.fish.interactiveShellInit = lib.mkAfter ''

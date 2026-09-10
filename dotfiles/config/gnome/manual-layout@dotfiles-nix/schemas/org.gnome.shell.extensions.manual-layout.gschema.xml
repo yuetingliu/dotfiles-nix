@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.manual-layout" path="/org/gnome/shell/extensions/manual-layout/">
+    <key name="gap" type="i">
+      <default>12</default>
+      <range min="0" max="128"/>
+      <summary>Outer and inter-window gap in logical pixels</summary>
+    </key>
+    <key name="arrange-left" type="as">
+      <default>[]</default>
+      <summary>Arrange focused window left and partner right</summary>
+    </key>
+    <key name="arrange-right" type="as">
+      <default>[]</default>
+      <summary>Arrange focused window right and partner left</summary>
+    </key>
+    <key name="arrange-top" type="as">
+      <default>[]</default>
+      <summary>Arrange focused window top and partner bottom</summary>
+    </key>
+    <key name="arrange-bottom" type="as">
+      <default>[]</default>
+      <summary>Arrange focused window bottom and partner top</summary>
+    </key>
+    <key name="fill" type="as">
+      <default>[]</default>
+      <summary>Fill the work area with gaps, without fullscreen</summary>
+    </key>
+    <key name="center" type="as">
+      <default>[]</default>
+      <summary>Center the focused window at 80% of the gap-inset work area</summary>
+    </key>
+  </schema>
+</schemalist>

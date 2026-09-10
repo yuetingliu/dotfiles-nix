@@ -58,7 +58,10 @@ first activation and therefore requires network access.
 
 Linux GUI applications are installed as user Flatpaks. The desktop environment
 must provide working XDG desktop portals; most standard Fedora installations do
-so already.
+so already. The Linux profile also configures six GNOME workspaces and a small
+keyboard-only arrangement extension; see [Linux window management](docs/linux-window-management.md)
+for shortcuts, activation, testing, and GNOME upgrade notes. This setup is not
+imported by the macOS profile.
 
 Ghostty and Kitty configuration is managed on both platforms, but their Linux
 applications are intentionally not installed by this flake. Install a terminal

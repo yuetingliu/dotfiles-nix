@@ -1,0 +1,7 @@
+{
+  "uuid": "manual-layout@dotfiles-nix",
+  "name": "Manual Layout",
+  "description": "Keyboard-only pair arrangement, fill with gaps, and centering. No automatic tiling.",
+  "shell-version": ["50"],
+  "settings-schema": "org.gnome.shell.extensions.manual-layout"
+}
