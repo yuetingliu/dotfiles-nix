@@ -16,9 +16,9 @@ in
   ] ++ (with pkgs; [
     # latex
     texlab
-    # Covers typical Org-mode articles (LaTeX, AMS math, graphics, fonts,
-    # hyperref) without pulling in every TeX Live application and language.
-    texlive.combined.scheme-medium
+    # Prefer extra disk usage over missing-package interruptions in Org exports
+    # and LaTeX templates (including moderncv resumes).
+    texlive.combined.scheme-full
 
     git
     ripgrep
