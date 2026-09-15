@@ -3,6 +3,11 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+;; Use ledger-mode with hledger journals.
+(add-to-list 'auto-mode-alist '("\\.journal\\'" . ledger-mode))
+(after! ledger-mode
+  (setq ledger-binary-path "hledger"))
+
 ;; Set org agenda files
 (setq org-agenda-files (append '("~/org/gtd.org"
                                  "~/org/work.org")
