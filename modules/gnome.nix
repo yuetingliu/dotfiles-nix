@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   uuid = "manual-layout@dotfiles-nix";
@@ -13,16 +13,34 @@ let
     node --check "$EXTENSION_DIR/extension.js"
     node --experimental-vm-modules --test ${../tests/gnome-window-management.mjs}
   '';
+  appindicatorSource = pkgs.gnomeExtensions.appindicator;
+  appindicatorUuid = appindicatorSource.extensionUuid;
+  appindicator = pkgs.runCommand "gnome-shell-extension-appindicator-no-ego-updates" {
+    nativeBuildInputs = [ pkgs.jq ];
+  } ''
+    extension_dir="$out/share/gnome-shell/extensions/${appindicatorUuid}"
+    mkdir -p "$extension_dir"
+    cp -r ${appindicatorSource}/share/gnome-shell/extensions/${appindicatorUuid}/. "$extension_dir/"
+    chmod -R u+w "$extension_dir"
+    jq 'del(.version)' "$extension_dir/metadata.json" > "$extension_dir/metadata.json.tmp"
+    mv "$extension_dir/metadata.json.tmp" "$extension_dir/metadata.json"
+  '';
   # Explicitly typed empty arrays are needed by dconf's GVariant serializer.
   noKeys = lib.hm.gvariant.mkArray "s" [ ];
   numbered = count: make: lib.listToAttrs (
     lib.concatMap make (lib.range 1 count)
   );
+  dropboxIndicatorIds = [ "dropbox-client" ]
+    ++ map (n: "dropbox-client-${toString n}") (lib.range 1 20);
+  dropboxIcon =
+    "${config.home.homeDirectory}/.local/share/flatpak/exports/share/icons/hicolor/24x24/apps/com.dropbox.Client.png";
 in
 {
   # Imported only by linux.nix. Fedora supplies GNOME/Mutter, not Home Manager.
   xdg.dataFile."gnome-shell/extensions/${uuid}".source =
     "${extension}/share/gnome-shell/extensions/${uuid}";
+  xdg.dataFile."gnome-shell/extensions/${appindicatorUuid}".source =
+    "${appindicator}/share/gnome-shell/extensions/${appindicatorUuid}";
 
   dconf = {
     enable = true;
@@ -67,8 +85,15 @@ in
           # Preserve the only extension enabled on this Fedora installation.
           "background-logo@fedorahosted.org"
           uuid
+          appindicatorUuid
         ];
       };
+      # Dropbox's status icons live inside the Flatpak sandbox. Point AppIndicator
+      # at an absolute exported app icon; otherwise it searches Dropbox's private
+      # IconThemePath for the override and falls back to the three-dot icon.
+      # Dropbox suffixes the StatusNotifierItem id, so cover the observed range.
+      "org/gnome/shell/extensions/appindicator".custom-icons =
+        map (id: lib.hm.gvariant.mkTuple [ id dropboxIcon dropboxIcon ]) dropboxIndicatorIds;
       "org/gnome/shell/extensions/manual-layout" = {
         gap = 12;
         arrange-left = [ "<Control><Super>h" ];

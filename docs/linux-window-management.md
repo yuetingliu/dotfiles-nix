@@ -168,6 +168,21 @@ Native workspace and navigation shortcuts remain usable. Re-enable with
 activation may also restore the declared enabled list. For persistent disabling,
 remove the UUID from `enabled-extensions` in `modules/gnome.nix` and apply.
 
+Dropbox tray support: `modules/gnome.nix` installs the AppIndicator extension
+through Nix and strips its `metadata.json` catalog `version`, because GNOME's
+online updater cannot update this store-backed symlink and otherwise leaves a
+persistent "update ready" notification. It also maps Dropbox's suffixed
+StatusNotifierItem ids (`dropbox-client-N`) to an absolute path for the
+Flatpak-exported `com.dropbox.Client` icon. The custom-icon entries must be
+GVariant tuples (`a(sss)`), not nested string arrays (`aas`), or GNOME ignores
+them and the preferences UI shows an empty list. The Flatpak's own status icons
+are not visible to the host Shell, so the fallback app icon does not reflect
+sync status. `modules/flatpak.nix` autostarts the Flatpak at login. After applying, log
+out/in so GNOME loads the extension before Dropbox starts; check
+`gnome-extensions info appindicatorsupport@rgcjonas.gmail.com` and confirm the
+Dropbox icon/menu appears in the top bar. Do not enable Dropbox's separate
+in-app autostart option as well.
+
 Rolling back a Home Manager generation restores its declared files/settings;
 log out/in after rollback to reload extension code. Removing a dconf declaration
 alone does not necessarily restore its prior/default value: explicitly reset
