@@ -13,8 +13,13 @@
                                  "~/org/work.org")
                                 (file-expand-wildcards "~/org/projects/*/*.org")))
 
-;; update timestamp when saving
+;; Update timestamps when saving; Org headers use inactive timestamps.
 (add-hook 'before-save-hook 'time-stamp)
+(add-hook 'org-mode-hook
+          (lambda ()
+            (setq-local time-stamp-start "^#\\+LAST_MODIFIED: \\["
+                        time-stamp-end "\\]"
+                        time-stamp-format "%Y-%m-%d %a %H:%M")))
 
 ;; Workflow sequence, track TODO state changes
 (after! org
